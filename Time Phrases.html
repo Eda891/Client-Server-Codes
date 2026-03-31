@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script type="text/javascript">
+        var name;
+        var now = new Date();
+        var hour = now.getHours();
+        document.write("Let me tell you the somethingg!!!")
+        name = window.prompt("Please enter your name: ");
+        if (hour < 12) {
+            document.write("Good morning " + name);
+        }
+        else if (12 <= hour < 6) {
+            document.write("Good afternoon "+ name);
+        }
+        else if (6<= hour) {
+            document.write("Good evening " + name);
+        }
+        else {
+            document.write("Good night " + name);
+        }
+        
+    </script>
+</head>
+<body>
+
+</body>
+</html>
