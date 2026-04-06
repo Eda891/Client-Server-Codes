@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script type="text/javascript">
+        var choice, balance = 1000, amount;
+        choice = window.prompt("Press:\n 1-Balance \n 2-Deposit Money \n  3-Withdraw Money \n  4-Exit");
+        choice = parseInt(choice);
+        while (choice != 4){
+            if (choice == 1)
+                document.write("<p> Balance:" + balance +"</p><hr>");
+            else if (choice == 2) {
+                amount = window.prompt("Write the amount you want to deposit");
+                balance += parseInt(amount);
+                document.write("<p>Choice: 2</p>");
+                document.write("<p>Amount:" + amount+"</p>");
+                document.write("<p>New balance:" + balance +"</p><hr>");
+            }
+
+            else if (choice == 3) {
+                amount = window.prompt("Write the amount you want to deposit");
+                amount = parseInt(amount);
+
+                if (amount > balance) {
+                    document.write("<p>Choice: 3</p>");
+                    document.write("<p>Amount:" + balance+"</p>");
+                    document.write("<p>insufficient balance</p ><hr>");
+                    break;
+                }
+
+                else {
+                    balance -= amount;
+                    document.write("<p>Choice: 3");
+                    document.write("<p>Amount:" + amount + "</p>");
+                    document.write("<p>New balance:" + balance + "</p><hr>");
+                }
+            }
+            else {
+                document.write("<p>Choice: 4</p>");
+                document.write("<p>Exiting...</p><hr>");
+                
+            }
+            choice = window.prompt("Press:\n 1-Balance \n 2-Deposit Money \n  3-Withdraw Money \n  4-Exit");
+            choice = parseInt(choice);
+        }
+            </script>
+</head>
+<body>
+
+</body>
+</html>

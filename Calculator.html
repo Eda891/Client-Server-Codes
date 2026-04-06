@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script>
+        var num1, num2,ope;
+        num1 = parseFloat(window.prompt("Number one?"));
+        num2 = parseFloat(window.prompt("Number two?"));
+        ope = window.prompt("Write the operator for the calculation: ");
+        result = calcu(num1, num2, ope);
+        function calcu(n1, n2, op) {
+            switch (op) {
+                case "+":
+                    return (n1 + n2);
+                case "-":
+                    return (n1 - n2);
+                case "*":
+                    return (n1 * n2);
+                case "/":
+                    return (n1 / n2);
+
+            }
+        }
+        document.write("<p><b>First number: " + num1 + "</b></p>");
+        document.write("<p><b>Second number: " + num2 + "</b></p>");
+        document.write("<p><b>Operator: " + ope + "</b></p>");
+        document.write("<p><b>Result is:" + result.toFixed(2) +"</b></p> ");
+    </script>
+</head>
+<body>
+
+</body>
+</html>
