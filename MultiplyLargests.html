@@ -1,0 +1,34 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script>
+        var a1, a2, a3, a4;
+        a1 = parseFloat(window.prompt("Enter the first num: "));
+        a2 = parseFloat(window.prompt("Enter the second num: "));
+        a3 = parseFloat(window.prompt("Enter the third num: "));
+        a4 = parseFloat(window.prompt("Enter the fourth num: "));
+        var largest = a1, smallest = a1;
+        var as = [a1, a2, a3, a4];
+        for (var i = 0; i < as.length; i++) {
+            if (as[i] > largest) {
+                largest = as[i]
+            }
+            else if (as[i] < smallest) {
+                smallest = as[i]
+            }
+        }
+        var multi = largest * smallest;
+        document.write("The first number is:  " + a1+"</br>");
+        document.write("The second number is:  " + a2 + "</br>");
+        document.write("The third number is:  " + a3 + "</br>");
+        document.write("The fourth number is:  " + a4 + "</br>");
+        document.write("The multipication of largest and smallest is  "+  multi);
+    </script>
+</head>
+<body>
+
+</body>
+</html>
