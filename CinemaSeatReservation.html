@@ -1,0 +1,256 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Cinema</title>
+
+    <style>
+        .brown {
+            background-color: rosybrown;
+            width: 200px;
+            height: 30px;
+            color: white;
+            margin: 5px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .beige {
+            background-color: beige;
+            width: 40px;
+            height: 40px;
+            margin: 5px;
+            border: 1px solid black;
+            cursor: pointer;
+        }
+        .show {
+            background-color: beige;
+            width: 40px;
+            height: 40px;
+            margin: 5px;
+            border: 1px solid black;
+        }
+        .noshow {
+            background-color: gray;
+            width: 40px;
+            height: 40px;
+            margin: 5px;
+            border: 1px solid black;
+        }
+        .taken {
+            background-color: gray;
+            width: 40px;
+            height: 40px;
+            margin: 5px;
+            border: 1px solid black;
+            cursor: not-allowed;
+        }
+
+        .cancel {
+            background-color: gray;
+            width: 40px;
+            height: 40px;
+            margin: 5px;
+            border: 1px solid black;
+            cursor: pointer;
+        }
+
+        .form {
+            background-color: antiquewhite;
+            text-align: center;
+            padding: 10px;
+        }
+    </style>
+
+    <script>
+        var seats = Array.from({ length: 5 }, () => Array(6).fill(0));
+
+        function showSeats() {
+            let html = "";
+            for (let i = 0; i < seats.length; i++) {
+                for (let j = 0; j < seats[i].length; j++) {
+                    if (seats[i][j] == 1) {
+                        html += "<input type='button' class='noshow' value='" + seats[i][j] + "'/>";
+                    }
+                    else {
+
+                        html += "<input type='button' class='show' value='" + seats[i][j] + "'/>";
+                    }
+                }
+                html += "<br>";
+            }
+            document.getElementById("output").innerHTML = html;
+        }
+
+        
+        function reserveSeat() {
+            showMenu();
+            function showMenu() {
+                let html = `
+            <p class="form">
+                <b>Reserve Menu</b><br><br>
+
+                <input class="brown" id="random" type="button" value="Random Seat"><br>
+                <input class="brown" id="Seat" type="button" value="Choose Seat"><br>
+            </p>
+                 `;
+
+                document.getElementById("output").innerHTML = html;
+
+                document.getElementById("random").addEventListener("click", randomSeat);
+                document.getElementById("Seat").addEventListener("click", seatChoice);
+            }
+
+            function randomSeat() {
+                for (let i = 0; i < seats.length; i++) {
+                    for (let j = 0; j < seats[i].length; j++) {
+                        if (seats[i][j] == 0) {
+                            seats[i][j] = 1;
+
+                            document.getElementById("output").innerHTML =
+                                `<p>Seat assigned at row ${i} column ${j}</p>
+                                 <button class="brown" id="back">Back</button>`;
+
+                            document.getElementById("back").addEventListener("click", showMenu);
+                            return;
+                        }
+                    }
+                }
+
+                document.getElementById("output").innerHTML =
+                    `<p>No seats available</p>
+                     <button class="brown" id="back">Back</button>`;
+
+                document.getElementById("back").addEventListener("click", showMenu);
+            }
+
+            function seatChoice() {
+
+                function renderSeats() {
+                    let html = "<p>Select a seat:</p>";
+
+                    for (let i = 0; i < seats.length; i++) {
+                        for (let j = 0; j < seats[i].length; j++) {
+
+                            let seatClass = seats[i][j] == 1 ? "taken" : "beige";
+
+                            html += `<button class="${seatClass}" data-row="${i}" data-col="${j}"></button>`;
+                        }
+                        html += "<br>";
+                    }
+
+                    html += `<p id="message"></p>
+                             <button class="brown" id="back">Back</button>`;
+
+                    document.getElementById("output").innerHTML = html;
+
+                    addEvents();
+
+                    document.getElementById("back").addEventListener("click", showMenu);
+                }
+
+                function addEvents() {
+                    let buttons = document.querySelectorAll("#output button");
+
+                    buttons.forEach(function (btn) {
+                        btn.addEventListener("click", function () {
+                            let r = parseInt(this.dataset.row);
+                            let c = parseInt(this.dataset.col);
+
+                            if (seats[r][c] == 1) {
+                                document.getElementById("message").innerText =
+                                    "Seat is full, choose another one";
+                            } else {
+                                seats[r][c] = 1;
+
+                                document.getElementById("message").innerText =
+                                    `Seat reserved at row ${r} column ${c}`;
+
+                                renderSeats();
+                            }
+                        });
+                    });
+                }
+
+                renderSeats();
+            }
+        }
+
+
+        function cancelSeat() {
+
+            function renderSeats() {
+                let html = "<p>Select a seat to cancel:</p>";
+
+                for (let i = 0; i < seats.length; i++) {
+                    for (let j = 0; j < seats[i].length; j++) {
+
+                        let seatClass = seats[i][j] == 1 ? "cancel" : "beige";
+
+                        html += `<button class="${seatClass}" data-row="${i}" data-col="${j}"></button>`;
+                    }
+                    html += "<br>";
+                }
+
+                html += `<p id="message"></p>
+                             <button class="brown" id="back">Back</button>`;
+
+                document.getElementById("output").innerHTML = html;
+
+                addEvents();
+
+                document.getElementById("back").addEventListener("click", clearOutput);
+            }
+
+            function addEvents() {
+                let buttons = document.querySelectorAll("#output button");
+
+                buttons.forEach(function (btn) {
+                    btn.addEventListener("click", function () {
+                        let r = parseInt(this.dataset.row);
+                        let c = parseInt(this.dataset.col);
+
+                        if (seats[r][c] == 1) {
+                            seats[r][c] = 0;
+
+                            document.getElementById("message").innerText =
+                                `Seat cancelled at row ${r} column ${c}`;
+
+                            renderSeats();
+                        } else {
+                            document.getElementById("message").innerText =
+                                "Seat is not reserved";
+                        }
+                    });
+                });
+            }
+
+            renderSeats();
+        }
+
+        function clearOutput() {
+            document.getElementById("output").innerHTML = "";
+        }
+
+        function main() {
+            document.getElementById("SButton").addEventListener("click", showSeats);
+            document.getElementById("RButton").addEventListener("click", reserveSeat);
+            document.getElementById("CButton").addEventListener("click", cancelSeat);
+        }
+
+        window.addEventListener("load", main);
+    </script>
+</head>
+
+<body>
+    <form class="form">
+        <h1>Cinema Website</h1>
+
+        <input class="brown" id="SButton" type="button" value="Show seats"><br>
+        <input class="brown" id="RButton" type="button" value="Reserve a seat"><br>
+        <input class="brown" id="CButton" type="button" value="Cancel Reservation"><br>
+
+        <p id="output"></p>
+    </form>
+</body>
+</html>
