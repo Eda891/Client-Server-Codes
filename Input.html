@@ -1,0 +1,69 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Input</title>
+    <style type="text/css">
+        div {
+            background-color: antiquewhite;
+            text-align: center;
+            padding: 10px;
+        }
+        .button {
+            background-color:darkblue;
+            margin: 5px;
+            color:white;
+            border: 1px solid black;
+            cursor: pointer;
+        }
+        h2{
+            text-align:center;
+        }
+    </style>
+    <script>
+        var result;
+        function calculate() {
+            var first = Number(document.getElementById("first").value);
+            var second = Number(document.getElementById("second").value);
+            var third = Number(document.getElementById("third").value);
+            var fourth = Number(document.getElementById("fourth").value);
+
+            result = Math.max(first, Math.max(second, Math.max(third, fourth))) * Math.min(first, Math.min(second, Math.min(third, fourth)));
+            document.getElementById("message").innerText = `Result is:  ${result}`;
+        }
+        function main() {
+            document.getElementById("operate").addEventListener("click", calculate);
+        }
+        window.addEventListener("load", main);
+    </script>
+</head>
+<body>
+    <div>
+        <h2>Multipication of the largest and the smallest numbers</h2>
+        <label>
+            Enter the first number <input id="first" type="number" />
+        </label>
+        <br />
+        <br />
+        <label>
+            Enter the second number <input id="second" type="number" />
+        </label>
+        <br />
+        <br />
+        <label>
+
+            Enter the third number <input id="third" type="number" />
+        </label>
+        <br />
+        <br />
+        <label>
+            Enter the fourth number <input id="fourth" type="number" />
+        </label>
+        <br />
+        <br />
+        <label><input class="button" id="operate" type="button" value="Press for the result" /></label>
+        <p id="message"></p>
+    </div>
+</body>
+</html>
