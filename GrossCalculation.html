@@ -1,0 +1,72 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style type="text/css">
+        table{
+            background-color:antiquewhite;
+        }
+    </style>
+    <script>
+        var sales = [], input;
+        var a=0, b=0, c=0, d=0, e=0, f=0, g=0, h=0,i=0;
+        input = parseInt(window.prompt("Write the sales amount: (press -1 to stop)"));
+        while (input !== -1) {
+            sales.push(input);
+            input = parseInt(window.prompt("Write the sales amount: (press -1 to stop)"));
+        }
+        calculate(sales);
+        function calculate(sales) {
+            for (var j = 0; j < sales.length; j++) {
+                var sale = sales[j];
+                if (sale > 200) {
+                    var gross = 200 + (sale * 0.09);
+                    if (gross >= 200 && gross <= 299) {
+                        a++;
+                    }
+                    else if (gross >= 300 && gross <= 399) {
+                        b++;
+                    }
+                    else if (gross >= 400 && gross <= 499) {
+                        c++;
+                    }
+                    else if (gross >= 500 && gross <= 599) {
+                        d++;
+                    }
+                    else if (gross >= 600 && gross <= 699) {
+                        e++;
+                    }
+                    else if (gross >= 700 && gross <= 799) {
+                        f++;
+                    }
+                    else if (gross >= 800 && gross <= 899) {
+                        g++;
+                    }
+                    else if (gross >= 900 && gross <= 999) {
+                        h++;
+                    }
+                    else if (gross >= 1000) {
+                        i++;
+                    }
+                }
+            }
+        }
+        document.write("<table border='1'><thead><tr> <th>Salary Amount</th><th>Salespeople amount</th></tr></thead >");
+        document.write("<tbody><tr><th>$200-299</th><td>" + a + "</p></td></tr>");  
+        document.write("<tr><th>$300-399</th> <td>" + b + "</td><tr>");
+        document.write("<tr><th>$400-499</th> <td>" + c + "</td><tr>");
+        document.write("<tr><th>$500-599</th> <td>" + d + "</td><tr>");
+        document.write("<tr><th>$600-699</th> <td>" + e + "</td><tr>");
+        document.write("<tr><th>$700-799</th> <td>" + f + "</td><tr>");
+        document.write("<tr><th>$800-899</th> <td>" + g + "</td><tr>");
+        document.write("<tr><th>$900-999</th> <td>" + h + "</td><tr>");
+        document.write("<tr><th>$1000 and over</th> <td>" + i + "</td><tr>");
+        document.write("</tbody></table >");    
+    </script>
+</head>
+<body>
+
+</body>
+</html>
